@@ -4,6 +4,7 @@ This is a simple program for overzealous astrology fans who also like fictional 
 GUI hasn't been written yet.
 
 You can enter planets and point like this (planet, sign, degree)
+
 example:
 
 sun
