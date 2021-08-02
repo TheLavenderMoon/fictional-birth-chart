@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 /**
  *
  */
@@ -20,7 +21,33 @@ public class options {
                 cal.find_aspect(planets.get(i).getPlanet(), planets.get(i).getDegree(), planets.get(j).getPlanet(), planets.get(j).getDegree());
             }
         }
-    }
+
+        System.out.println("\n for midpoint aspects enter 1");
+
+        if(sc.nextInt() == 1) {
+
+            ArrayList<Planet> planetsmid = new ArrayList<Planet>();
+            for (int i = 0; i < planets.size(); i++) {
+                for (int j = i + 1; j < planets.size(); j++) {
+                    Planet p = new Planet();
+                    p.setPlanet(planets.get(i).getPlanet() + "/" + planets.get(j).getPlanet());
+                    p.setDegree(cal.midpoint(planets.get(i).getDegree(), planets.get(j).getDegree()));
+                    p.setSign(converter.degree_to_sign(p.getDegree()));
+                    planetsmid.add(p);
+                }
+
+            }
+
+            for (int i = 0; i < planets.size(); i++) {
+                for (int j = 0; j < planetsmid.size(); j++) {
+                    cal.find_composite_natal_aspect(planets.get(i).getPlanet(), planets.get(i).getDegree(), planetsmid.get(j).getPlanet(), planetsmid.get(j).getDegree());
+                }
+            }
+            System.out.println();
+
+        }
+
+        }
 
     public void synastry(){
 
@@ -52,27 +79,83 @@ public class options {
             }
         }
 
-        System.out.println("\n for house placements enter 1 (equal) or 2 (placidus)");
-        int op = sc.nextInt();
+        System.out.println("\n for house overlay enter 1 else enter 2");
 
-        if(op == 1){
-            System.out.println("\n enter ascendant sign and degree for the first person");
-            String sign1 = sc.next();
-            int degree1 = sc.nextInt();
-            cal.find_house_placements_equal(converter.make_degree(sign1, degree1), planets2);
-            System.out.println("\n enter ascendant sign and degree for the second person");
-            String sign2 = sc.next();
-            int degree2 = sc.nextInt();
-            cal.find_house_placements_equal(converter.make_degree(sign2, degree2), planets1);
-        }else if(op == 2){
-            System.out.println("\n enter ascendant sign and degree for the first person");
-            ArrayList<House> cups1 = new ArrayList<House>();
-            cups1 = get_natal_cups_asc_axis(sc);
-            cal.find_house_placements_placidus(cups1,planets2);
-            System.out.println("\n enter ascendant sign and degree for the second person");
-            ArrayList<House> cups2 = new ArrayList<House>();
-            cups2 = get_natal_cups_asc_axis(sc);
-            cal.find_house_placements_placidus(cups2,planets1);
+        if(sc.nextInt() == 1) {
+
+            System.out.println("\n for house placements enter 1 (equal) or 2 (placidus)");
+            int op = sc.nextInt();
+
+            if (op == 1) {
+                System.out.println("\n enter ascendant sign and degree for the first person");
+                String sign1 = sc.next();
+                int degree1 = sc.nextInt();
+                cal.find_house_placements_equal(converter.make_degree(sign1, degree1), planets2);
+                System.out.println("\n enter ascendant sign and degree for the second person");
+                String sign2 = sc.next();
+                int degree2 = sc.nextInt();
+                cal.find_house_placements_equal(converter.make_degree(sign2, degree2), planets1);
+            } else if (op == 2) {
+                System.out.println("\n enter ascendant sign and degree for the first person");
+                ArrayList<House> cups1 = new ArrayList<House>();
+                cups1 = get_natal_cups_asc_axis(sc);
+                cal.find_house_placements_placidus(cups1, planets2);
+                System.out.println("\n enter ascendant sign and degree for the second person");
+                ArrayList<House> cups2 = new ArrayList<House>();
+                cups2 = get_natal_cups_asc_axis(sc);
+                cal.find_house_placements_placidus(cups2, planets1);
+            }
+        }
+
+        System.out.println("\n for midpoint synastry enter 1");
+
+        if(sc.nextInt() == 1){
+
+            ArrayList<Planet> planets = new ArrayList<Planet>();
+            for (int i = 0; i < numOfplanets1 ; i++) {
+                for (int j = i+1; j < numOfplanets1 ; j++) {
+                    Planet p = new Planet();
+                    p.setPlanet(planets1.get(i).getPlanet()+"/"+planets1.get(j).getPlanet());
+                    p.setDegree(cal.midpoint(
+                            planets1.get(i).getDegree(),
+                            planets1.get(j).getDegree()
+                            )
+                    );
+                    p.setSign(converter.degree_to_sign(p.getDegree()));
+                    planets.add(p);
+                }
+
+            }
+
+            System.out.println("person 2 to person one's midpoints:");
+            for (int i = 0; i < planets2.size(); i++) {
+                for (int j = 0; j < planets.size(); j++) {
+                    cal.find_composite_natal_aspect(planets2.get(i).getPlanet(), planets2.get(i).getDegree(), planets.get(j).getPlanet(), planets.get(j).getDegree());
+                }
+            }
+            System.out.println();
+
+            planets.clear();
+            for (int i = 0; i < numOfplanets2 ; i++) {
+                for (int j = i+1; j < numOfplanets2 ; j++) {
+                    Planet p = new Planet();
+                    p.setPlanet(planets2.get(i).getPlanet()+"-"+planets2.get(j).getPlanet());
+                    p.setDegree(cal.midpoint(
+                            planets2.get(i).getDegree(),
+                            planets2.get(j).getDegree()
+                            )
+                    );
+                    p.setSign(converter.degree_to_sign(p.getDegree()));
+                    planets.add(p);
+                }
+            }
+
+            System.out.println("person one to person 2s midpoints:");
+            for (int i = 0; i < planets1.size(); i++) {
+                for (int j = 0; j < planets.size(); j++) {
+                    cal.find_composite_natal_aspect(planets1.get(i).getPlanet(), planets1.get(i).getDegree(), planets.get(j).getPlanet(), planets.get(j).getDegree());
+                }
+            }
         }
 
     }
@@ -135,6 +218,8 @@ public class options {
 
     }
 
+
+
     public ArrayList<Planet> get_natal(int numOfplanets, Scanner sc){
         converter conv = new converter();
         ArrayList<Planet> planets = new ArrayList<Planet>();
@@ -143,7 +228,7 @@ public class options {
             Planet p = new Planet();
             p.setPlanet(sc.next());
             p.setSign(sc.next());
-            p.setDegree(conv.make_degree(p.getSign(), sc.nextInt()));
+            p.setDegree(conv.make_degree(p.getSign(), sc.nextDouble()));
             planets.add(p);
         }
         return planets;
