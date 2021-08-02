@@ -7,26 +7,6 @@ You can enter planets and point like this (planet, sign, degree)
 
 example:
 
-sun
-leo
-0
-moon
-taurus
-22
-mars
-scorpio
-12
-saturn
-cancer
-28
-neptune
-virgo
-5
-pluto
-aquarius
-18
-ascendant
-capricorn
-23
+<img width="461" alt="Screen Shot 2021-08-02 at 3 15 55 PM" src="https://user-images.githubusercontent.com/79756838/127849898-26ca7d9e-828f-4e50-a2c8-2335d20143c1.png">
 
 
