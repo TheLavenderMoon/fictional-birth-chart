@@ -96,13 +96,13 @@ public class calculator {
 
         //System.out.println(planet1 + " " + planet2 + " " + degree_dif);
 
-        if(-4 <= degree_dif && degree_dif <= 4){
+        if(-3 <= degree_dif && degree_dif <= 3){
             double orb = degree_dif - 0;
             System.out.println(planet1 + " - " + planet2 + " conjunction orb " + orb);
-        }else if(88 <= degree_dif && degree_dif <= 92){
+        }else if(88 < degree_dif && degree_dif < 92){
             double orb = degree_dif - 90;
             System.out.println(planet1 + " - " + planet2 + " square orb " + orb);
-        }else if(176 <= degree_dif && degree_dif <= 184){
+        }else if(177 <= degree_dif && degree_dif <= 183){
             double orb = degree_dif - 180;
             System.out.println(planet1 + " - " + planet2 + " opposition orb " + orb);
         }
