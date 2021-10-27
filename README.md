@@ -10,7 +10,7 @@ example:
 <img width="461" alt="Screen Shot 2021-08-02 at 3 15 55 PM" src="https://user-images.githubusercontent.com/79756838/127849898-26ca7d9e-828f-4e50-a2c8-2335d20143c1.png">
 
 Little notes for help:
-- possible distance between the sun and mercury: 0-28 degrees from either side
+- possible distance between the sun and mercury: 0-28 degrees from either side edit: there was a mistake in moon phase names. 
 - possible distance between the sun and venus: 0-48 degrees from either side
 - distance between sun and moon based on moon phases:
   
